@@ -36,10 +36,7 @@ var particleCount = 40,
 	noiseLength = 1000,
 	noiseStrength = 1;
 
-var canvas = document.getElementById('stars'),
-	//orbits = document.getElementById('orbits'),
-	context = canvas.getContext('2d'),
-	mouse = { x: 0, y: 0 },
+var mouse = { x: 0, y: 0 },
 	m = {},
 	r = 0,
 	c = 1000, // multiplier for delaunay points, since floats too small can mess up the algorithm
@@ -81,11 +78,8 @@ function init() {
 	bgImg.src = bgURL;
 	*/
 
-	// Size canvas
-	resize();
-
-	mouse.x = canvas.clientWidth / 2;
-	mouse.y = canvas.clientHeight / 2;
+	mouse.x = window.innerWidth / 2;
+	mouse.y = window.innerHeight / 2;
 
 	// Create particle positions
 	for (i = 0; i < particleCount; i++) {
@@ -141,9 +135,9 @@ function init() {
 	if ('ontouchstart' in document.documentElement && window.DeviceOrientationEvent) {
 		console.log('Using device orientation');
 		window.addEventListener('deviceorientation', function(e) {
-			mouse.x = (canvas.clientWidth / 2) - ((e.gamma / 90) * (canvas.clientWidth / 2) * 2);
-			mouse.y = (canvas.clientHeight / 2) - ((e.beta / 90) * (canvas.clientHeight / 2) * 2);
-			//console.log('Center: x:'+(canvas.clientWidth/2)+' y:'+(canvas.clientHeight/2));
+			mouse.x = (window.innerWidth / 2) - ((e.gamma / 90) * (window.innerWidth / 2) * 2);
+			mouse.y = (window.innerHeight / 2) - ((e.beta / 90) * (window.innerHeight / 2) * 2);
+			//console.log('Center: x:'+(window.innerWidth/2)+' y:'+(window.innerHeight/2));
 			//console.log('Orientation: x:'+mouse.x+' ('+e.gamma+') y:'+mouse.y+' ('+e.beta+')');
 		}, true);
 	}
@@ -166,7 +160,6 @@ function init() {
 	// Animation loop
 	(function animloop(){
 		requestAnimFrame(animloop);
-		resize();
 		render();
 	})();
 }
@@ -182,43 +175,11 @@ function render() {
 		//console.log('NOISE x:'+nPos.x+' y:'+nPos.y);
 	}
 
-	// Clear
-	context.clearRect(0, 0, canvas.width, canvas.height);
-
-	if (blurSize > 0) {
-		context.shadowBlur = blurSize;
-		context.shadowColor = color;
-	}
-
 	if (renderParticles) {
 		// Render particles
 		for (var i = 0; i < particleCount; i++) {
 			particles[i].render();
 		}
-	}
-
-	if (renderMesh) {
-		// Render all lines
-		context.beginPath();
-		for (var v = 0; v < vertices.length-1; v++) {
-			// Splits the array into triplets
-			if ((v + 1) % 3 === 0) { continue; }
-
-			var p1 = particles[vertices[v]],
-				p2 = particles[vertices[v+1]];
-
-			//console.log('Line: '+p1.x+','+p1.y+'->'+p2.x+','+p2.y);
-
-			var pos1 = position(p1.x, p1.y, p1.z),
-				pos2 = position(p2.x, p2.y, p2.z);
-
-			context.moveTo(pos1.x, pos1.y);
-			context.lineTo(pos2.x, pos2.y);
-		}
-		context.strokeStyle = color;
-		context.lineWidth = lineWidth;
-		context.stroke();
-		context.closePath();
 	}
 
 	if (renderLinks) {
@@ -247,20 +208,6 @@ function render() {
 			flares[j].render();
 		}
 	}
-
-	/*
-	if (orbitTilt) {
-		var tiltX = -(((canvas.clientWidth / 2) - mouse.x + ((nPos.x - 0.5) * noiseStrength)) * tilt),
-			tiltY = (((canvas.clientHeight / 2) - mouse.y + ((nPos.y - 0.5) * noiseStrength)) * tilt);
-
-		orbits.style.transform = 'rotateY('+tiltX+'deg) rotateX('+tiltY+'deg)';
-	}
-	*/
-}
-
-function resize() {
-	canvas.width = window.innerWidth * (window.devicePixelRatio || 1);
-	canvas.height = canvas.width * (canvas.clientHeight / canvas.clientWidth);
 }
 
 function startLink(vertex, length) {
@@ -423,7 +370,7 @@ Link.prototype.render = function() {
 					points.push([pos.x, pos.y]);
 				}
 
-				var linkSpeedRel = linkSpeed * 0.00001 * canvas.width;
+				var linkSpeedRel = linkSpeed * 0.00001 * window.innerWidth;
 				this.traveled += linkSpeedRel;
 				var d = this.distances[this.linked.length-1];
 				// Calculate last point based on linkSpeed and distance travelled to next point
@@ -541,13 +488,13 @@ function noisePoint(i) {
 
 function position(x, y, z) {
 	return {
-		x: (x * canvas.width) + ((((canvas.width / 2) - mouse.x + ((nPos.x - 0.5) * noiseStrength)) * z) * motion),
-		y: (y * canvas.height) + ((((canvas.height / 2) - mouse.y + ((nPos.y - 0.5) * noiseStrength)) * z) * motion)
+		x: (x * window.innerWidth) + ((((window.innerWidth / 2) - mouse.x + ((nPos.x - 0.5) * noiseStrength)) * z) * motion),
+		y: (y * window.innerHeight) + ((((window.innerHeight / 2) - mouse.y + ((nPos.y - 0.5) * noiseStrength)) * z) * motion)
 	};
 }
 
 function sizeRatio() {
-	return canvas.width >= canvas.height ? canvas.width : canvas.height;
+	return window.innerWidth >= window.innerHeight ? window.innerWidth : window.innerHeight;
 }
 
 function random(min, max, float) {
@@ -556,6 +503,16 @@ function random(min, max, float) {
 		Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+document.addEventListener('mousemove', parallax);
+
+function parallax(event) {
+    const video = document.querySelector('.background-video');
+    const speed = 0.1; // Increase the speed for a more pronounced effect
+    const x = (window.innerWidth - event.pageX * speed) / 50;
+    const y = (window.innerHeight - event.pageY * speed) / 50;
+
+    video.style.transform = `translate(${x}px, ${y}px)`;
+}
 
 // init
-if (canvas) init();
+init();

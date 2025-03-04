@@ -6,10 +6,53 @@
     <link href="../style/index.css" rel="stylesheet">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <title>Infos</title>
+    <style>
+        .btn {
+            background-color: #1E40AF;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn:hover {
+            background-color: #1D4ED8;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
 </head>
-<body>
-    <div class="titrebase">
-        Informations
+<body class="flex flex-col justify-center items-center min-h-screen">
+    <div class="content">
+        <div class="titrebase">
+            Informations
+        </div>
+        <div class="button-container blue flex justify-center mt-8">
+            <a href="../../index.html" class="btn btn-blue">Retour</a>
+        </div>
     </div>
+    <video autoplay muted loop class="background-video">
+        <source src="../Images/Batcave.mp4" type="video/mp4">
+    </video>
 </body>
 </html>

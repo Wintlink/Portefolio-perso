@@ -7,68 +7,170 @@
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link href="../style/animated-background.css" rel="stylesheet">
     <title>Portfolio</title>
+    <style>
+        .btn {
+            background-color: #1E40AF;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn:hover {
+            background-color: #1D4ED8;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
 </head>
 <body class="flex flex-col justify-center items-center min-h-screen">
-    <div class="titrebase text-center text-4xl font-bold mb-8">
-        Projets
-    </div>
-    <div class="p-4 sm:p-8 relative rounded-lg after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:inset-ring after:inset-ring-gray-950/5 dark:after:inset-ring-white/10">
-        <div class="flex justify-center items-center -mr-16 -mb-8 [--size:--spacing(64)] lg:flex lg:justify-center xl:block">
-            <div class="mt-8 sm:mt-16">
-                <h3 class="text-base/6 font-semibold text-gray-950 dark:text-white">Browse properties</h3>
-                <div class="mt-6 grid grid-cols-[repeat(2,var(--size))] grid-rows-[repeat(3,var(--size))] gap-4 sm:grid-cols-[repeat(5,var(--size))] sm:grid-rows-[repeat(2,var(--size))]">
-                    
-                    <div class="relative col-span-2 row-span-1 overflow-hidden rounded-t-2xl sm:col-span-1 sm:row-span-2 sm:rounded-none sm:rounded-l-2xl dark:outline dark:outline-white/10 tile">
-                        <img alt="" class="object-cover w-full h-full" src="../Images/server.jpg">
-                        <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
-                            <span class="p-4 text-sm/5 font-semibold text-white">Home Server</span>
+    <video autoplay muted loop class="background-video">
+        <source src="../Images/Batcave.mp4" type="video/mp4">
+    </video>
+    <div class="content">
+        <div class="titrebase text-center text-white text-4xl font-bold mb-8">
+            Projets
+        </div>
+        <div class="p-4 sm:p-8 relative rounded-lg after:pointer-events-none after:absolute after:inset-0 after:rounded-lg ">
+            <div class="flex justify-center items-center -mr-16 -mb-8 [--size:--spacing(64)] lg:flex lg:justify-center xl:block">
+                <div class="mt-8 sm:mt-16">
+                    <h3 class="text-base/6 font-semibold text-gray-950 dark:text-white">Browse properties</h3>
+                    <div class="mt-6 grid grid-cols-[repeat(2,var(--size))] grid-rows-[repeat(3,var(--size))] gap-4 sm:grid-cols-[repeat(5,var(--size))] sm:grid-rows-[repeat(2,var(--size))]">
+                        
+                        <div class="relative col-span-2 row-span-1 overflow-hidden rounded-t-2xl sm:col-span-1 sm:row-span-2 sm:rounded-none sm:rounded-l-2xl dark:outline dark:outline-white/10 tile">
+                            <img alt="" class="object-cover w-full h-full" src="../Images/server.jpg">
+                            <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
+                                <span class="p-4 text-sm/5 font-semibold text-white" style="text-shadow: 2px 2px 4px black;">Home Server</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="relative dark:outline dark:outline-white/10 tile">
-                        <img alt="" class="object-cover w-full h-full" src="../Images/minidieval.png">
-                        <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
-                            <span class="p-4 text-sm/5 font-semibold text-white">Jeu vidéo Minideval</span>
+                        <div class="relative dark:outline dark:outline-white/10 tile">
+                            <img alt="" class="object-cover w-full h-full" src="../Images/minidieval.png">
+                            <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
+                                <span class="p-4 text-sm/5 font-semibold text-white" style="text-shadow: 2px 2px 4px black;">Jeu vidéo Minideval</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="relative col-span-2 overflow-hidden dark:outline dark:outline-white/10 tile">
-                        <img alt="" class="aspect-2/1 object-cover w-full h-full" src="../Images/rovo.PNG">
-                        <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
-                            <span class="p-4 text-sm/5 font-semibold text-white">Rovo</span>
+                        <div class="relative col-span-2 overflow-hidden dark:outline dark:outline-white/10 tile">
+                            <img alt="" class="aspect-2/1 object-cover w-full h-full" src="../Images/rovo.PNG">
+                            <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
+                                <span class="p-4 text-sm/5 font-semibold text-white" style="text-shadow: 2px 2px 4px black;">Rovo</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="relative overflow-hidden sm:rounded-tr-2xl dark:outline dark:outline-white/10 tile">
-                        <img alt="" class="object-cover w-full h-full" src="../Images/vélo (3).JPEG">
-                        <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
-                            <span class="p-4 text-sm/5 font-semibold text-white">VTT AE home made</span>
+                        <div class="relative overflow-hidden sm:rounded-tr-2xl dark:outline dark:outline-white/10 tile">
+                            <img alt="" class="object-cover w-full h-full" src="../Images/vélo (3).JPEG">
+                            <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
+                                <span class="p-4 text-sm/5 font-semibold text-white" style="text-shadow: 2px 2px 4px black;">VTT AE home made</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="relative col-span-2 overflow-hidden dark:outline dark:outline-white/10 tile">
-                        <img alt="" class="aspect-2/1 object-cover w-full h-full" src="../Images/Cardar.png">
-                        <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
-                            <span class="p-4 text-sm/5 font-semibold text-white">Site Web Cardar</span>
+                        <div class="relative col-span-2 overflow-hidden dark:outline dark:outline-white/10 tile">
+                            <img alt="" class="aspect-2/1 object-cover w-full h-full" src="../Images/Cardar.png">
+                            <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
+                                <span class="p-4 text-sm/5 font-semibold text-white" style="text-shadow: 2px 2px 4px black;">Site Web Cardar</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="relative overflow-hidden dark:outline dark:outline-white/10 tile">
-                        <img alt="" class="object-cover w-full h-full" src="../Images/vélo (3).JPEG">
-                        <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
-                            <span class="p-4 text-sm/5 font-semibold text-white">VTT AE home made</span>
+                        <div class="relative overflow-hidden dark:outline dark:outline-white/10 tile">
+                            <img alt="" class="object-cover w-full h-full" src="../Images/vélo (3).JPEG">
+                            <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
+                                <span class="p-4 text-sm/5 font-semibold text-white" style="text-shadow: 2px 2px 4px black;">VTT AE home made</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="relative dark:outline  overflow-hidden rounded-b-2xl sm:rounded-bl-none dark:outline-white/10 tile">
-                        <img alt="" class="object-cover w-full h-full" src="../Images/halo.jpg">
-                        <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
-                            <span class="p-4 text-sm/5 font-semibold text-white">Casque imprimé en 3D</span>
+                        <div class="relative dark:outline  overflow-hidden rounded-b-2xl sm:rounded-bl-none dark:outline-white/10 tile">
+                            <img alt="" class="object-cover w-full h-full" src="../Images/halo.jpg">
+                            <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
+                                <span class="p-4 text-sm/5 font-semibold text-white" style="text-shadow: 2px 2px 4px black;">Casque imprimé en 3D</span>
+                            </div>
                         </div>
-                    </div>
 
-                </div>
-                <div class="mt-8 text-center">
-                    <a href="../../index.html" class="btn bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
-                        Retour
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="button-container blue flex justify-center mt-8">
+            <a href="../../index.html" class="btn btn-blue">Retour</a>
+        </div>
     </div>
+    <div id="overlay" class="hidden fixed inset-0  bg-opacity-50 z-10"></div>
 </body>
+<script>
+    const tileContents = [
+        {
+            title: "Home Server",
+            text: "Création d'un serveur personnel polyvalent à partir de composants classiques. J'ai mis en place un serveur multimédia photo et vidéo, accessible partout, mais également une synchonisation type google drive stockée en local, totalement gratuite, et sans aucune rétention de données par un tier."
+        },
+        {
+            title: "Jeu vidéo Minideval",
+            text: "Minideval est un jeu vidéo de plateforme réalisé en Python, en utilisant la librairie pygame. Pour ce projet, j'ai du recrée un système de physique complet de 0, j'ai crée des cartes à partir de matrices et j'ai appris à animer des sprites ."
+        },
+        {
+            title: "Rovo",
+            text: "Rovo est un petit rover omnidirectionnel équipé d'une tourelle à eau animée sur deux axes. J'ai designé ce robot en 3D, puis j'ai imprimé ces composants, le tout est controllé par une arduino et reliée a un télécommande sans fil pour les opérations ."
+        },
+        {
+            title: "VTT AE home made",
+            text: "Création de mon véhicule de déplacement quotidien, mon vélo éléctrique. J'ai monté un moteur 750W avec 105Nm de couple sur mon vélo, avec une batterie, un display, des capteurs de freins... Ce véhicule est un alternative économique et écologique comparée au vélo éléctrique du commerce."
+        },
+        {
+            title: "Site Web Cardar",
+            text: "Cardar est un site web qui permet de faire des recherches et de trier toutes les cartes graphiques qui existent, le tout tourne sur un serveur node JS, avec une API qui fait le lien entre une base de données de plus de 3200 cartes, et la recherche multicritères présentes sur le site ."
+        },
+        {
+            title: "VTT AE home made",
+            text: "This project involves building a homemade electric mountain bike, including the design and assembly of the electrical components."
+        },
+        {
+            title: "Casque imprimé en 3D",
+            text: "Création d'un casque inspiré de la licence Halo, imprimé entièrement en 3D sur une Ender3V2. Impression en plusieurs partie, traitement des pièces en sortie, polissage..."
+        }
+    ];
+
+    document.querySelectorAll('.tile').forEach((tile, index) => {
+        tile.addEventListener('click', (event) => {
+            const rect = tile.getBoundingClientRect();
+            const overlay = document.getElementById('overlay');
+            overlay.style.transformOrigin = `${event.clientX - rect.left}px ${event.clientY - rect.top}px`;
+            overlay.classList.remove('hidden');
+            tile.classList.add('active');
+            tile.style.transform = 'translate(-50%, -50%) scale(0.9)'; // Ensure centering
+            tile.querySelector('img').classList.add('blurred'); // Add blur effect to image
+            tile.innerHTML += `
+                <div class="tile-content text-white p-4">
+                    <h2 class="text-2xl font-bold mb-2">${tileContents[index].title}</h2>
+                    <p>${tileContents[index].text}</p>
+                </div>
+            `;
+        });
+    });
+
+    document.getElementById('overlay').addEventListener('click', () => {
+        document.getElementById('overlay').classList.add('hidden');
+        document.querySelectorAll('.tile').forEach(tile => {
+            tile.classList.remove('active');
+            tile.style.transform = 'translate(0, 0) scale(1)'; // Reset transform
+            tile.querySelector('img').classList.remove('blurred'); // Remove blur effect from image
+            const tileContent = tile.querySelector('.tile-content');
+            if (tileContent) {
+                tileContent.remove();
+            }
+        });
+    });
+</script>
 </html>

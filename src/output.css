@@ -1857,6 +1857,26 @@
   .transform-view {
     transform-box: view-box;
   }
+  .btn {
+    background-color: #1E40AF;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .btn:hover {
+    background-color: #1D4ED8;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 }
 @property --tw-translate-x {
   syntax: "*";
