@@ -11,6 +11,10 @@
             font-family: 'BO CD Mono Medium';
             src: url('../font/BO CD Mono Medium.otf') format('opentype');
         }
+        @font-face {
+            font-family: 'EX PS Medium Neon';
+            src: url('../font/EX PS Medium Neon.otf') format('opentype');
+        }
 
         .btn {
             background: transparent;
@@ -53,12 +57,85 @@
             position: relative;
             z-index: 2;
         }
+        .info-text {
+            font-family: 'BO CD Mono Medium', sans-serif;
+            color: white;
+            text-align: center;
+            margin-top: 1rem;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .info-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .titrebase {
+            font-size: 4rem; /* Slightly smaller than the index page */
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+            font-family: 'EX PS Medium Neon', sans-serif; /* Updated font-family */
+            text-transform: uppercase;
+            margin-top: 0; /* Adjusted to ensure the title is visible */
+        }
+
+        .titrebase::before,
+        .titrebase::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0.8;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(145deg, #005CFF, #00F8FF);
+        }
+
+        .titrebase::before {
+            transform: translate(-3px, 0);
+            clip-path: inset(0 50% 0 0);
+            animation: glitchEffect 0.6s infinite alternate;
+        }
+
+        .titrebase::after {
+            transform: translate(3px, 0);
+            clip-path: inset(0 0 0 50%);
+            animation: glitchEffect 0.6s infinite alternate;
+        }
+
+        @keyframes glitchEffect {
+            0% { transform: translate(-3px, 0); }
+            100% { transform: translate(3px, 0); }
+        }
     </style>
 </head>
 <body class="flex flex-col justify-center items-center min-h-screen">
     <div class="content">
-        <div class="titrebase">
+        <div class="titrebase" data-text="Informations">
             Informations
+        </div>
+        <div class="button-container blue flex justify-center mt-8">
+            <button id="qui-suis-je-btn" class="btn btn-blue flex items-center">
+                Qui suis-je
+                <img src="../Images/search.gif" alt="Qui suis-je" class="w-6 h-6 ml-2">
+            </button>
+        </div>
+        <div id="info-container" class="mt-8">
+            <div class="info-text">
+                Terry Lagarde
+            </div>
+            <div class="info-text">
+                Auto Entrepreneur en informatique
+            </div>
+            <div class="info-text">
+                Étudiant en Développeur informatique au CESI
+            </div>
+            <div class="info-text">
+                Né le 5 juin 2005 (Âge: <span id="age"></span> ans)
+            </div>
         </div>
         <div class="button-container blue flex justify-center mt-8">
             <a href="../../index.html" class="btn btn-blue">Retour</a>
@@ -66,12 +143,32 @@
         <div class="button-container blue flex justify-center mt-8">
             <a href="../../docs/CV.pdf" class="btn flex items-center" download>
                 Télécharger CV
-                <img src="../Images/download.gif" alt="Télécharger" class="w-6 h-6 ml-2">
+                <img src="../Images/download.gif" alt="Télécharger" class="w-8 h-8 ml-2">
             </a>
         </div>
     </div>
     <video autoplay muted loop class="background-video">
         <source src="../Images/Batcave.mp4" type="video/mp4">
     </video>
+    <script>
+        function calculateAge(birthDate) {
+            const today = new Date();
+            const birthDateObj = new Date(birthDate);
+            let age = today.getFullYear() - birthDateObj.getFullYear();
+            const monthDiff = today.getMonth() - birthDateObj.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDateObj.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        document.getElementById('age').textContent = calculateAge('2005-06-05');
+
+        document.getElementById('qui-suis-je-btn').addEventListener('click', function() {
+            document.querySelectorAll('.info-text').forEach(function(element) {
+                element.classList.toggle('visible');
+            });
+        });
+    </script>
 </body>
 </html>
