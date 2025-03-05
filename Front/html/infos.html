@@ -110,6 +110,12 @@
             0% { transform: translate(-3px, 0); }
             100% { transform: translate(3px, 0); }
         }
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem; /* Adjust the gap as needed */
+        }
     </style>
 </head>
 <body class="flex flex-col justify-center items-center min-h-screen">
@@ -137,14 +143,24 @@
                 Né le 5 juin 2005 (Âge: <span id="age"></span> ans)
             </div>
         </div>
-        <div class="button-container blue flex justify-center mt-8">
-            <a href="../../index.html" class="btn btn-blue">Retour</a>
+        <div class="contact-container mt-8 text-center">
+            <div class="info-text visible">
+                Email: terrylagarde.enterprise@gmail.com
+                <img src="../Images/mail.png" alt="Email" class="w-8 h-8 ml-2 inline">
+            </div>
+            <div class="info-text visible">
+                Discord: Wintlink
+                <img src="../Images/discord.png" alt="Discord" class="w-8 h-8 ml-2 inline">
+            </div>
         </div>
         <div class="button-container blue flex justify-center mt-8">
-            <a href="../../docs/CV.pdf" class="btn flex items-center" download>
+            <a href="../docs/CV.pdf" class="btn flex items-center" download>
                 Télécharger CV
                 <img src="../Images/download.gif" alt="Télécharger" class="w-8 h-8 ml-2">
             </a>
+        </div>
+            <div class="button-container blue flex justify-center mt-8">
+            <a href="../../index.html" class="btn btn-blue">Retour</a>
         </div>
     </div>
     <video autoplay muted loop class="background-video">
@@ -165,7 +181,7 @@
         document.getElementById('age').textContent = calculateAge('2005-06-05');
 
         document.getElementById('qui-suis-je-btn').addEventListener('click', function() {
-            document.querySelectorAll('.info-text').forEach(function(element) {
+            document.querySelectorAll('#info-container .info-text').forEach(function(element) {
                 element.classList.toggle('visible');
             });
         });
