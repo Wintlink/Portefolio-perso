@@ -10,6 +10,14 @@
     <title>Portfolio</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Raleway:900&display=swap');
+        @font-face {
+            font-family: 'EX PS Medium Neon';
+            src: url('./Front/font/EX PS Medium Neon.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'BO CD Mono Medium';
+            src: url('./Front/font/BO CD Mono Medium.otf') format('opentype');
+        }
 
         body {
             background-color: black;
@@ -17,12 +25,12 @@
 
         .titrebase {
             font-size: 5rem;
-            font-weight: bold;
+
             text-align: center;
             margin-bottom: 2rem;
             position: relative;
             z-index: 2;
-            font-family: 'Raleway', sans-serif;
+            font-family: 'EX PS Medium Neon', sans-serif; /* Updated font-family */
             text-transform: uppercase;
             margin-top: 0; /* Adjusted to ensure the title is visible */
         }
@@ -34,17 +42,19 @@
             left: 0;
             top: 0;
             opacity: 0.8;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(145deg, #005CFF, #00F8FF);
         }
 
         .titrebase::before {
-            color: #0682f7;
             transform: translate(-3px, 0);
             clip-path: inset(0 50% 0 0);
             animation: glitchEffect 0.6s infinite alternate;
         }
 
         .titrebase::after {
-            color: #0682f7;
             transform: translate(3px, 0);
             clip-path: inset(0 0 0 50%);
             animation: glitchEffect 0.6s infinite alternate;
@@ -56,24 +66,35 @@
         }
 
         .btn {
-            background-color: #1E40AF;
-            color: white;
+            background: transparent;
+            color: transparent;
             padding: 1rem 2rem;
             border-radius: 0.5rem;
             text-decoration: none;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
             position: relative;
             z-index: 2;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 2px solid;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(145deg, #005CFF, #00F8FF);
+            font-weight: bolder; /* Increase font weight */
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(145deg, #005CFF, #00F8FF);
+            font-family: 'BO CD Mono Medium', sans-serif; /* Updated font-family */
         }
         .btn:hover {
-            background-color: #1D4ED8;
             transform: translateY(-3px);
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
         .btn:active {
             transform: translateY(0);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-thin {
+            padding: 0.5rem 1rem; /* Reduce padding for thinner button */
         }
         .background-video {
             position: absolute;
@@ -101,8 +122,14 @@
         </div>
     </div>
     <div class="button-container flex justify-between w-full px-8">
-        <a href="Front/html/project.html" class="btn">Projets</a>
-        <a href="Front/html/infos.html" class="btn">Infos</a>
+        <a href="Front/html/project.html" class="btn flex items-center">
+            Projets
+            <img src="Front/Images/project.gif" alt="Projets" class="w-8 h-8 ml-2">
+        </a>
+        <a href="Front/html/infos.html" class="btn btn-thin flex items-center">
+            Infos
+            <img src="Front/Images/infos.gif" alt="Infos" class="w-6 h-6 ml-2">
+        </a>
     </div>
     <video autoplay muted loop class="background-video">
         <source src="./Front/Images/Batcave.mp4" type="video/mp4">
