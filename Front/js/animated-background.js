@@ -507,11 +507,11 @@ document.addEventListener('mousemove', parallax);
 
 function parallax(event) {
     const video = document.querySelector('.background-video');
-    const speed = 0.1; // Increase the speed for a more pronounced effect
-    const x = (window.innerWidth - event.pageX * speed) / 50;
-    const y = (window.innerHeight - event.pageY * speed) / 50;
+    const speed = 0.2; // Further increase the speed for a stronger effect
+    const x = (window.innerWidth - event.pageX * speed) / 25;
+    const y = (window.innerHeight - event.pageY * speed) / 25;
 
-    video.style.transform = `translate(${x}px, ${y}px)`;
+    video.style.transform = `translate(${x}px, ${y}px) scale(1.2)`; // Further increase scaling to ensure no borders
 }
 
 // init

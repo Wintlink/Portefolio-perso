@@ -16,6 +16,10 @@
             src: url('../font/EX PS Medium Neon.otf') format('opentype');
         }
 
+        body {
+            background-color: black; /* Ensure background is black */
+        }
+
         .btn {
             background: transparent;
             color: transparent;
@@ -56,6 +60,7 @@
         .content {
             position: relative;
             z-index: 2;
+            text-align: center; /* Ensure content is centered */
         }
         .info-text {
             font-family: 'BO CD Mono Medium', sans-serif;
@@ -73,19 +78,17 @@
         .titrebase {
             font-size: 4rem; /* Slightly smaller than the index page */
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 6rem;
             position: relative;
             z-index: 2;
             font-family: 'EX PS Medium Neon', sans-serif; /* Updated font-family */
             text-transform: uppercase;
-            margin-top: 0; /* Adjusted to ensure the title is visible */
+            margin-top: -60px; /* Adjusted to move the title higher */
         }
 
-        .titrebase::before,
-        .titrebase::after {
+        .titrebase::before {
             content: attr(data-text);
             position: absolute;
-            left: 0;
             top: 0;
             opacity: 0.8;
             background-clip: text;
@@ -95,26 +98,41 @@
         }
 
         .titrebase::before {
-            transform: translate(-3px, 0);
-            clip-path: inset(0 50% 0 0);
+            transform: translate(-1px, 0); /* Reduced left offset */
             animation: glitchEffect 0.6s infinite alternate;
         }
 
-        .titrebase::after {
-            transform: translate(3px, 0);
-            clip-path: inset(0 0 0 50%);
-            animation: glitchEffect 0.6s infinite alternate;
-        }
 
         @keyframes glitchEffect {
-            0% { transform: translate(-3px, 0); }
-            100% { transform: translate(3px, 0); }
+            0% { transform: translate(-1px, 0); }
+            100% { transform: translate(1px, 0); }
         }
         .contact-container {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 2rem; /* Adjust the gap as needed */
+        }
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .skills-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .skill-logo {
+            width: 50px;
+            height: 50px;
+        }
+        .button-container {
+            margin-top: 15px; /* Move the button down by 30px */
         }
     </style>
 </head>
@@ -142,6 +160,32 @@
             <div class="info-text">
                 Né le 5 juin 2005 (Âge: <span id="age"></span> ans)
             </div>
+            <div class="info-text">
+                Nationalité: Français
+                <img src="../Images/france.gif" alt="France" class="skill-logo inline"> <!-- Ensure same size -->
+                <img src="../Images/europe.gif" alt="Europe" class="skill-logo inline"> <!-- Ensure same size -->
+            </div>
+        </div>
+        <div class="button-container blue flex justify-center mt-8">
+            <button id="skills-btn" class="btn btn-blue flex items-center">
+                Compétences
+                <img src="../Images/competence.gif" alt="Compétences" class="w-6 h-6 ml-2">
+            </button>
+        </div>
+        <div id="skills-container" class="skills-container mt-8">
+            <img src="../Images/javascript.png" alt="JavaScript" class="skill-logo">
+            <img src="../Images/html.png" alt="HTML" class="skill-logo">
+            <img src="../Images/css.png" alt="CSS" class="skill-logo">
+            <img src="../Images/python.png" alt="Python" class="skill-logo">
+            <img src="../Images/fusion360.png" alt="Fusion 360" class="skill-logo">
+            <img src="../Images/arduino.png" alt="Arduino" class="skill-logo">
+            <img src="../Images/notion.png" alt="Notion" class="skill-logo">
+            <img src="../Images/office.png" alt="Office" class="skill-logo">
+            <img src="../Images/deepseek.png" alt="DeepSeek" class="skill-logo">
+            <img src="../Images/sql.png" alt="SQL" class="skill-logo">
+            <img src="../Images/photoshop.png" alt="Photoshop" class="skill-logo">
+            <img src="../Images/premiere.png" alt="Premiere" class="skill-logo">
+            <img src="../Images/windows.png" alt="Windows" class="skill-logo">
         </div>
         <div class="contact-container mt-8 text-center">
             <div class="info-text visible">
@@ -152,6 +196,10 @@
                 Discord: Wintlink
                 <img src="../Images/discord.png" alt="Discord" class="w-8 h-8 ml-2 inline">
             </div>
+            <div class="info-text visible">
+                Site Web: <a href="https://wintpc.fr/" target="_blank" class="text-blue-500 underline">wintpc.fr</a>
+                <img src="../Images/wintpc.png" alt="Wint'PC" class="w-8 h-8 ml-2 inline">
+            </div>
         </div>
         <div class="button-container blue flex justify-center mt-8">
             <a href="../docs/CV.pdf" class="btn flex items-center" download>
@@ -159,7 +207,7 @@
                 <img src="../Images/download.gif" alt="Télécharger" class="w-8 h-8 ml-2">
             </a>
         </div>
-            <div class="button-container blue flex justify-center mt-8">
+        <div class="button-container blue flex justify-center mt-8">
             <a href="../../index.html" class="btn btn-blue">Retour</a>
         </div>
     </div>
@@ -184,6 +232,10 @@
             document.querySelectorAll('#info-container .info-text').forEach(function(element) {
                 element.classList.toggle('visible');
             });
+        });
+
+        document.getElementById('skills-btn').addEventListener('click', function() {
+            document.getElementById('skills-container').classList.toggle('visible');
         });
     </script>
 </body>

@@ -6,11 +6,19 @@
     <link href="../style/index.css" rel="stylesheet">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link href="../style/animated-background.css" rel="stylesheet">
-    <title>Portfolio</title>
+    <title>Projets</title>
     <style>
         @font-face {
             font-family: 'BO CD Mono Medium';
             src: url('../font/BO CD Mono Medium.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'EX PS Medium Neon';
+            src: url('../font/EX PS Medium Neon.otf') format('opentype');
+        }
+
+        body {
+            background-color: black; /* Ensure background is black */
         }
 
         .btn {
@@ -53,7 +61,125 @@
         .content {
             position: relative;
             z-index: 2;
+            text-align: left;
         }
+        .titrebase {
+            font-size: 4rem; /* Slightly smaller than the index page */
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+            font-family: 'EX PS Medium Neon', sans-serif; /* Updated font-family */
+            text-transform: uppercase;
+            margin-top: -100px; /* Adjusted to move the title higher */
+        }
+
+        .titrebase::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            opacity: 0.8;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(145deg, #005CFF, #00F8FF);
+        }
+
+        .titrebase::before {
+            transform: translate(-1px, 0); /* Reduced left offset */
+            animation: glitchEffect 0.6s infinite alternate;
+        }
+
+        @keyframes glitchEffect {
+            0% { transform: translate(-1px, 0); }
+            100% { transform: translate(1px, 0); }
+        }
+        .button-container {
+            margin-top: 60px; /* Move the button down by 30px */
+        }
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .skill-logo {
+            width: 50px;
+            height: 50px;
+        }
+        .tile-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-inex: 40; /* Ensure text content is above the blur */
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 1); /* Make text outline stronger */
+        }
+        .tile.active .tile-content {
+            filter: none; /* Ensure text content is not blurred */
+        }
+        .tile img.blurred {
+            filter: blur(5px); /* Add blur effect to image */
+        }
+        .content.blur {
+            filter: blur(3px);
+        }
+        #overlay {
+            transition: transform 0.3s ease;
+        }
+        .tile-content .btn {
+            margin-top: 10px; /* Adjust the margin to position the button lower */
+        }
+        .tile {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform: translateX(-25px); /* Shift tiles 25px to the left */
+        }
+        .tile:hover {
+            transform: translateX(-25px) scale(1.05); /* Maintain the shift on hover */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .tile.active {
+            transform: translate(-50%, -50%) translateX(-25px) scale(0.9); /* Maintain the shift when active */
+        }
+        @media (max-width: 1400px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                grid-template-rows: auto !important;
+            }
+            .tile {
+                grid-column: span 1 !important;
+                grid-row: span 1 !important;
+            }
+        }
+        @media (max-width: 800px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                grid-template-rows: auto !important;
+            }
+            .tile {
+                grid-column: span 1 !important;
+                grid-row: span 1 !important;
+            }
+        }
+        @media (max-width: 400px) {
+            .grid {
+                grid-template-columns: repeat(1, 1fr) !important;
+                grid-template-rows: auto !important;
+            }
+            .tile {
+                grid-column: span 1 !important;
+                grid-row: span 1 !important;
+            }
+        }
+        @media (max-width: 200px) {
+            .tile {
+                width: 90% !important;
+                height: auto !important;
+            }
+        }
+
     </style>
 </head>
 <body class="flex flex-col justify-center items-center min-h-screen">
@@ -61,14 +187,14 @@
         <source src="../Images/Batcave.mp4" type="video/mp4">
     </video>
     <div class="content">
-        <div class="titrebase text-center text-white text-4xl font-bold mb-8">
+        <div class="titrebase" data-text="Projets">
             Projets
         </div>
         <div class="p-4 sm:p-8 relative rounded-lg after:pointer-events-none after:absolute after:inset-0 after:rounded-lg ">
             <div class="flex justify-center items-center -mr-16 -mb-8 [--size:--spacing(64)] lg:flex lg:justify-center xl:block">
                 <div class="mt-8 sm:mt-16">
                     <h3 class="text-base/6 font-semibold text-gray-950 dark:text-white">Mes projets</h3>
-                    <div class="mt-6 grid grid-cols-[repeat(2,var(--size))] grid-rows-[repeat(3,var(--size))] gap-4 sm:grid-cols-[repeat(5,var(--size))] sm:grid-rows-[repeat(2,var(--size))]">
+                    <div class="mt-6 grid grid-cols-[repeat(2,var(--size))] grid-rows-[repeat(3,var(--size))] gap-4 sm:grid-cols-[repeat(5,var(--size))] sm:grid-rows-[repeat(2,var(--size))] justify-center">
                         
                         <div class="relative col-span-2 row-span-1 overflow-hidden rounded-t-2xl sm:col-span-1 sm:row-span-2 sm:rounded-none sm:rounded-l-2xl dark:outline dark:outline-white/10 tile">
                             <img alt="" class="object-cover w-full h-full" src="../Images/server.jpg">
@@ -101,9 +227,9 @@
                             </div>
                         </div>
                         <div class="relative overflow-hidden dark:outline dark:outline-white/10 tile">
-                            <img alt="" class="object-cover w-full h-full" src="../Images/vélo (3).JPEG">
+                            <img alt="" class="object-cover w-full h-full" src="../Images/Logo.png">
                             <div class="absolute inset-0 flex items-end bg-linear-to-b from-transparent via-transparent to-gray-950">
-                                <span class="p-4 text-sm/5 font-semibold text-white" style="text-shadow: 2px 2px 4px black;">VTT AE home made</span>
+                                <span class="p-4 text-sm/5 font-semibold text-white" style="text-shadow: 2px 2px 4px black;">Entreprise Wint'PC</span>
                             </div>
                         </div>
                         <div class="relative dark:outline  overflow-hidden rounded-b-2xl sm:rounded-bl-none dark:outline-white/10 tile">
@@ -127,31 +253,40 @@
     const tileContents = [
         {
             title: "Home Server",
-            text: "Création d'un serveur personnel polyvalent à partir de composants de récupération. J'ai mis en place un serveur multimédia photo et vidéo, accessible partout, mais également une synchonisation type google drive stockée en local, totalement gratuite, et sans aucune rétention de données par un tier."
+            text: "Création d'un serveur personnel polyvalent à partir de composants de récupération. J'ai mis en place un serveur multimédia photo et vidéo, accessible partout, mais également une synchonisation type google drive stockée en local, totalement gratuite, et sans aucune rétention de données par un tier.",
+            skills: ["windows.png", "ubuntu.png", "plex.png"]
         },
         {
             title: "Jeu vidéo Minideval",
-            text: "Minideval est un jeu vidéo de plateforme réalisé en Python, en utilisant la librairie pygame. Pour ce projet, j'ai du recréer un système de physique complet de 0, j'ai crée des cartes à partir de matrices et j'ai appris à animer des sprites ."
+            text: "Minideval est un jeu vidéo de plateforme réalisé en Python, en utilisant la librairie pygame. Pour ce projet, j'ai du recréer un système de physique complet de 0, j'ai crée des cartes à partir de matrices et j'ai appris à animer des sprites .",
+            skills: ["python.png"]
         },
         {
             title: "Rovo",
-            text: "Rovo est un petit rover omnidirectionnel équipé d'une tourelle à eau animée sur deux axes. J'ai designé ce robot en 3D, puis j'ai imprimé ses composants, le tout est controllé par une arduino et reliée à une télécommande sans fil pour les opérations ."
+            text: "Rovo est un petit rover omnidirectionnel équipé d'une tourelle à eau animée sur deux axes. J'ai designé ce robot en 3D, puis j'ai imprimé ses composants, le tout est controllé par une arduino et reliée à une télécommande sans fil pour les opérations .",
+            skills: ["arduino.png", "fusion360.png", "cura.png"]
         },
         {
             title: "VTT AE home made",
-            text: "Création de mon véhicule de déplacement quotidien, mon vélo éléctrique. J'ai monté un moteur 750W avec 105Nm de couple sur mon vélo, avec une batterie, un display, des capteurs de freins... Ce véhicule est un alternative économique et écologique comparée au vélo éléctrique du commerce."
+            text: "Création de mon véhicule de déplacement quotidien, mon vélo éléctrique. J'ai monté un moteur 750W avec 105Nm de couple sur mon vélo, avec une batterie, un display, des capteurs de freins... Ce véhicule est un alternative économique et écologique comparée au vélo éléctrique du commerce.",
+            skills: []
         },
         {
             title: "Site Web Cardar",
-            text: "Cardar est un site web qui permet de faire des recherches et de trier toutes les cartes graphiques qui existent, le tout tourne sur un serveur node JS, avec une API qui fait le lien entre une base de données de plus de 3200 cartes, et la recherche multicritères présentes sur le site ."
+            text: "Cardar est un site web qui permet de faire des recherches et de trier toutes les cartes graphiques qui existent, le tout tourne sur un serveur node JS, avec une API qui fait le lien entre une base de données de plus de 3200 cartes, et la recherche multicritères présentes sur le site .",
+            skills: ["nodejs.png", "html.png", "css.png", "javascript.png", "sql.png"],
+            link: "https://github.com/Wintlink/Site-web-CG-Top"
         },
         {
-            title: "VTT AE home made",
-            text: "This project involves building a homemade electric mountain bike, including the design and assembly of the electrical components."
+            title: "Wint'PC",
+            text: "Création d'une auto entreprise d'informatique. Je m'occupe du montage de pc, de leur réparation, de la création de configuration personnalisés et du troobleshooting",
+            skills: [],
+            link: "https://wintpc.fr/"
         },
         {
             title: "Casque imprimé en 3D",
-            text: "Création d'un casque inspiré de la licence Halo, imprimé entièrement en 3D sur une Ender3V2. Impression en plusieurs partie, traitement des pièces en sortie, polissage..."
+            text: "Création d'un casque inspiré de la licence Halo, imprimé entièrement en 3D sur une Ender3V2. Impression en plusieurs partie, traitement des pièces en sortie, polissage...",
+            skills: ["fusion360.png", "cura.png"]
         }
     ];
 
@@ -164,26 +299,35 @@
             tile.classList.add('active');
             tile.style.transform = 'translate(-50%, -50%) scale(0.9)'; // Ensure centering
             tile.querySelector('img').classList.add('blurred'); // Add blur effect to image
+            let skillsHTML = '';
+            tileContents[index].skills.forEach(skill => {
+                skillsHTML += `<img src="../Images/${skill}" alt="${skill}" class="skill-logo">`;
+            });
+            let linkHTML = tileContents[index].link ? `<a href="${tileContents[index].link}" target="_blank" class="btn btn-blue mt-4" onclick="event.stopPropagation()">Voir le projet</a>` : '';
             tile.innerHTML += `
                 <div class="tile-content text-white p-4">
                     <h2 class="text-2xl font-bold mb-2">${tileContents[index].title}</h2>
                     <p>${tileContents[index].text}</p>
+                    <div class="skills-container mt-4">${skillsHTML}</div>
+                    ${linkHTML}
                 </div>
             `;
         });
     });
 
-    document.getElementById('overlay').addEventListener('click', () => {
-        document.getElementById('overlay').classList.add('hidden');
-        document.querySelectorAll('.tile').forEach(tile => {
-            tile.classList.remove('active');
-            tile.style.transform = 'translate(0, 0) scale(1)'; // Reset transform
-            tile.querySelector('img').classList.remove('blurred'); // Remove blur effect from image
-            const tileContent = tile.querySelector('.tile-content');
-            if (tileContent) {
-                tileContent.remove();
-            }
-        });
+    document.getElementById('overlay').addEventListener('click', (event) => {
+        if (!event.target.closest('.tile-content .btn')) {
+            document.getElementById('overlay').classList.add('hidden');
+            document.querySelectorAll('.tile').forEach(tile => {
+                tile.classList.remove('active');
+                tile.style.transform = 'translate(0, 0) scale(1)'; // Reset transform
+                tile.querySelector('img').classList.remove('blurred'); // Remove blur effect from image
+                const tileContent = tile.querySelector('.tile-content');
+                if (tileContent) {
+                    tileContent.remove();
+                }
+            });
+        }
     });
 </script>
 </html>
